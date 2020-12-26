@@ -4,8 +4,9 @@ void main() {
   runApp(
     Center(
       child: Text(
-        "Hello, Flutter!",
+        "Hello, Flutter",
         textDirection: TextDirection.ltr,
+        style: TextStyle(color: Colors.red, fontSize: 50),
       ),
     ),
   );
