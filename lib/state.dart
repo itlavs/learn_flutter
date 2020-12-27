@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_widget/widget.dart';
@@ -30,7 +32,7 @@ class MyState extends State<MyWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       LinearProgressIndicator(
-                        value: 25,
+                        value: _progress,
                         backgroundColor: Colors.orange,
                       ),
                       Text(
@@ -49,6 +51,7 @@ class MyState extends State<MyWidget> {
           onPressed: () {
             setState(() {
               _loading = !_loading;
+              _updateProgress();
             });
           },
           child: Icon(Icons.file_download),
@@ -56,4 +59,21 @@ class MyState extends State<MyWidget> {
       ),
     );
   }
+
+  void _updateProgress() {
+    const second = const Duration(milliseconds: 500);
+    Timer.periodic(second, (Timer t) {
+      setState(() {
+        _progress += 0.1;
+        if (_progress >= 1.0) {
+          _loading = false;
+          t.cancel();
+          _progress = 0.0;
+          return;
+        }
+      });
+    });
+  }
 }
+
+
