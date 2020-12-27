@@ -11,7 +11,17 @@ class MyApp extends StatelessWidget {
           title: Text("Images"),
         ),
         body: Center(
-            child: Text("Test")),
+            child: Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                Image(
+                  fit: BoxFit.fitHeight,
+                  image: AssetImage("assets/images/back.png"),
+                ),
+                Image.asset("assets/icons/icon.png")
+              ],
+          ),
+        ),
       ),
     );
   }
